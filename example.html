@@ -1,0 +1,151 @@
+<html xml:lang="ru" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"                     type="text/javascript"></script>
+<script src="http://jquery-json.googlecode.com/files/jquery.json-2.3.min.js" type="text/javascript"></script>
+<script src="https://raw.github.com/LeKovr/formEV/master/jquery.formev.js" type="text/javascript"></script>
+<style type="text/css">
+.hide {
+  display: none;
+}
+.odd {
+  background-color:#EDEDED;
+}
+</style>
+</head>
+<body>
+<table border=1 width="95%">
+  <tr class="datarow">
+    <form id="field_delivery_cityid_source" action="tmpl.spec.save">
+      <td class="nowraped">
+        <input type="hidden" name="id" value="tmpl_id">
+        <span class="editable" title="Заблокировать изменение в наследуемых шаблонах">
+          <input type="checkbox" name="has_on_lock_id"  checked disabled class="val hide"/>
+          <span class="view"></span>
+        </span>
+        <span class="editable" title="Использовать поле">
+          <input type="checkbox" name="is_on"  checked disabled class="val hide" />
+          <span class="view"></span>
+        </span>
+      </td>
+      <td>Адрес поставки</td>
+      <td>
+        <span class="editable">
+          <input type="checkbox" name="has_def_lock_id" title="Заблокировать значение по умолчанию"  class="val hide"/>
+          <span class="view"></span>
+        </span>
+        <span class="editable" title="Значение по умолчанию">
+          <input name="def_val" type="text"  placeholder="Значение по умолчанию" value="1" class="val hide" />
+          <span class="view"></span>
+        </span>
+      </td>
+      <td class="noWrap">
+        <span class="editable">
+          <input type="checkbox" name="has_acl_lock_id" title="Заблокировать уровень просмотра" class="val hide" />
+          <span class="view"></span>
+        </span>
+        <span class="editable">
+          <select name="acl_id" class="val hide" >
+            <option value="2" >управляющий</option>          <option value="3" >участник</option>          <option value="4" >приглашенный</option>          <option value="5"  selected>авторизованный</option>          <option value="6" >все</option>          <option value="7" >система</option>
+          </select>
+          <span class="view"></span>
+        </span>
+      </td>
+      <td>
+        <span class="editable">
+          <input type="checkbox" name="has_type_lock_id" title="Заблокировать ограничения" class="val hide" />
+          <span class="view"></span>
+        </span><br/>
+        <span class="editable">
+          <input type="text" name="type_val1" value="значение"  class=" val hide">
+          <span class="view"></span>
+        </span><br/>
+        <span class="editable">
+          <label class="val hide"><input type="radio" id="val2-1" name="val2" value="1" checked="checked" />Да</label>
+          <label class="val hide"><input type="radio" id="val2-0" name="val2" value="0" />Нет</label>
+          <span class="view"></span>
+        </span>
+      </td>
+      <td width="15%">
+        <input type="button" name="edit_btnn" value="Изменить" class="edit_btn"/>
+        <input type="button" name="e2" value="Сохранить" class="ed save hide"/>
+        <input type="reset" name="e1" value="Отмена"  class="ed reset hide"/>
+      </td>
+    </form>
+  </tr>
+  <tr class="datarow">
+    <form id="field_delivery_cityid_source2" action="tmpl.spec.save">
+      <td class="nowraped">
+      <input type="hidden" name="id" value="tmpl_id2">
+        <span class="editable" title="Заблокировать изменение в наследуемых шаблонах">
+          <input type="checkbox" name="has_on_lock_id"  checked disabled class="val hide"/>
+          <span class="view"></span>
+      </span>
+      <span class="editable" title="Использовать поле">
+        <input type="checkbox" name="is_on"  checked disabled class="val hide" />
+          <span class="view"></span>
+      </span>
+    </td>
+    <td>Адрес поставки</td>
+    <td>
+      <span class="editable">
+        <input type="checkbox" name="has_def_lock_id" title="Заблокировать значение по умолчанию"  class="val hide"/>
+        <span class="view">-</span>
+      </span>
+      <span class="editable" title="Значение по умолчанию">
+        <input name="def_val" type="text"  placeholder="Значение по умолчанию" value="1" class="val hide" />
+        <span class="view"></span>
+      </span>
+    </td>
+    <td class="noWrap">
+      <span class="editable">
+        <input type="checkbox" name="has_acl_lock_id" title="Заблокировать уровень просмотра" class="val hide" />
+        <span class="view"></span>
+      </span>
+      <span class="editable">
+        <select name="acl_id" class="val hide" >
+          <option value="2" >управляющий</option>          <option value="3" >участник</option>          <option value="4" >приглашенный</option>          <option value="5"  selected>авторизованный</option>          <option value="6" >все</option>          <option value="7" >система</option>
+        </select>
+        <span class="view"></span>
+      </span>
+    </td>
+    <td>
+      <span class="editable">
+        <input type="checkbox" name="has_type_lock_id" title="Заблокировать ограничения" class="val hide" />
+        <span class="view"></span>
+      </span><br/>
+      <span class="editable">
+        <input type="text" name="type_val1" value="значение"  class=" val hide">
+        <span class="view"></span>
+      </span><br/>
+      <span class="editable">
+        <label class="val hide"><input type="radio" id="val2-1" name="val2" value="1" checked="checked" />Да</label>
+        <label class="val hide"><input type="radio" id="val2-0" name="val2" value="0" />Нет</label>
+        <span class="view"></span>
+      </span>
+    </td>
+    <td>
+      <input type="button" name="edit_btnn" value="Изменить" class="edit_btn"/>
+      <input type="button" name="e2" value="Сохранить" class="ed save hide"/>
+      <input type="reset" name="e1" value="Отмена"  class="ed reset hide"/>
+    </td>
+  </form>
+</tr>
+</table>
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+  $('.datarow').formEV({
+    names: {
+      childs: ['.val', '.view']
+    , buttons: ['.edit_btn', '.ed']
+    , chkeckboxes: [ '-', '+' ]
+    }
+  });
+  $("tr:odd").addClass('odd');
+});
+
+//]]>
+</script>
+</body>
+</html>
