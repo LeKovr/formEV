@@ -1,4 +1,4 @@
-<html xml:lang="ru" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!doctype html><html itemscope="itemscope" itemtype="http://schema.org/WebPage">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"                     type="text/javascript"></script>
 <script src="http://jquery-json.googlecode.com/files/jquery.json-2.3.min.js" type="text/javascript"></script>
@@ -10,140 +10,186 @@
 .odd {
   background-color:#EDEDED;
 }
+.name {
+  float: left;
+  width: 100px;
+  height: 28px;
+}
+.col2::after {
+  display:block;
+  content:"";
+  clear:both;
+}
+table.row td,th {
+  width: 200px;
+}
 </style>
 </head>
 <body>
-<table border=1 width="95%">
-  <tr class="datarow">
-    <form id="field_delivery_cityid_source" action="tmpl.spec.save">
-      <td class="nowraped">
-        <input type="hidden" name="id" value="tmpl_id">
-        <span class="editable" title="Заблокировать изменение в наследуемых шаблонах">
-          <input type="checkbox" name="has_on_lock_id"  checked disabled class="val hide"/>
-          <span class="view"></span>
-        </span>
-        <span class="editable" title="Использовать поле">
-          <input type="checkbox" name="is_on"  checked disabled class="val hide" />
-          <span class="view"></span>
-        </span>
-      </td>
-      <td>Адрес поставки</td>
-      <td>
-        <span class="editable">
-          <input type="checkbox" name="has_def_lock_id" title="Заблокировать значение по умолчанию"  class="val hide"/>
-          <span class="view"></span>
-        </span>
-        <span class="editable" title="Значение по умолчанию">
-          <input name="def_val" type="text"  placeholder="Значение по умолчанию" value="1" class="val hide" />
-          <span class="view"></span>
-        </span>
-      </td>
-      <td class="noWrap">
-        <span class="editable">
-          <input type="checkbox" name="has_acl_lock_id" title="Заблокировать уровень просмотра" class="val hide" />
-          <span class="view"></span>
-        </span>
-        <span class="editable">
-          <select name="acl_id" class="val hide" >
-            <option value="2" >управляющий</option>          <option value="3" >участник</option>          <option value="4" >приглашенный</option>          <option value="5"  selected>авторизованный</option>          <option value="6" >все</option>          <option value="7" >система</option>
-          </select>
-          <span class="view"></span>
-        </span>
-      </td>
-      <td>
-        <span class="editable">
-          <input type="checkbox" name="has_type_lock_id" title="Заблокировать ограничения" class="val hide" />
-          <span class="view"></span>
-        </span><br/>
-        <span class="editable">
-          <input type="text" name="type_val1" value="значение"  class=" val hide">
-          <span class="view"></span>
-        </span><br/>
-        <span class="editable">
-          <label class="val hide"><input type="radio" id="val2-1" name="val2" value="1" checked="checked" />Да</label>
-          <label class="val hide"><input type="radio" id="val2-0" name="val2" value="0" />Нет</label>
-          <span class="view"></span>
-        </span>
-      </td>
-      <td width="15%">
-        <input type="button" name="edit_btnn" value="Изменить" class="edit_btn"/>
-        <input type="button" name="e2" value="Сохранить" class="ed save hide"/>
-        <input type="reset" name="e1" value="Отмена"  class="ed reset hide"/>
-      </td>
-    </form>
-  </tr>
-  <tr class="datarow">
-    <form id="field_delivery_cityid_source2" action="tmpl.spec.save">
-      <td class="nowraped">
-      <input type="hidden" name="id" value="tmpl_id2">
-        <span class="editable" title="Заблокировать изменение в наследуемых шаблонах">
-          <input type="checkbox" name="has_on_lock_id"  checked disabled class="val hide"/>
-          <span class="view"></span>
+<h1>jQuery formEV examples</h1>
+<h2>1. Simple form</h2>
+<div class="datarow">
+  <form id="form_submit_id">
+    <div class="name">Text field:</div>
+    <span class="editable col2" title="Text field">
+      <input name="f1_text" type="text"  placeholder="Text field" value="some text" class="edit hide" />
+      <span class="view"></span>
+    </span>
+    <div class="name">Select:</div>
+    <span class="editable col2" title="Select field">
+      <select name="f2_sel" class="edit hide" >
+        <option value="1" >value 1</option>
+        <option value="2" selected>value 2</option>
+        <option value="3" >value 3</option>
+      </select>
+      <span class="view"></span>
+    </span>
+    <div class="name">Checkbox:</div>
+    <span class="editable col2" title="Checkbox field">
+      <input type="checkbox" name="f3_chk" checked class="edit hide"/>
+      <span class="view">
+        <span class="on hide">YES</span>
+        <span class="off hide">NO</span>
       </span>
-      <span class="editable" title="Использовать поле">
-        <input type="checkbox" name="is_on"  checked disabled class="val hide" />
-          <span class="view"></span>
-      </span>
-    </td>
-    <td>Адрес поставки</td>
-    <td>
-      <span class="editable">
-        <input type="checkbox" name="has_def_lock_id" title="Заблокировать значение по умолчанию"  class="val hide"/>
-        <span class="view">-</span>
-      </span>
-      <span class="editable" title="Значение по умолчанию">
-        <input name="def_val" type="text"  placeholder="Значение по умолчанию" value="1" class="val hide" />
-        <span class="view"></span>
-      </span>
-    </td>
-    <td class="noWrap">
-      <span class="editable">
-        <input type="checkbox" name="has_acl_lock_id" title="Заблокировать уровень просмотра" class="val hide" />
-        <span class="view"></span>
-      </span>
-      <span class="editable">
-        <select name="acl_id" class="val hide" >
-          <option value="2" >управляющий</option>          <option value="3" >участник</option>          <option value="4" >приглашенный</option>          <option value="5"  selected>авторизованный</option>          <option value="6" >все</option>          <option value="7" >система</option>
-        </select>
-        <span class="view"></span>
-      </span>
-    </td>
-    <td>
-      <span class="editable">
-        <input type="checkbox" name="has_type_lock_id" title="Заблокировать ограничения" class="val hide" />
-        <span class="view"></span>
-      </span><br/>
-      <span class="editable">
-        <input type="text" name="type_val1" value="значение"  class=" val hide">
-        <span class="view"></span>
-      </span><br/>
-      <span class="editable">
-        <label class="val hide"><input type="radio" id="val2-1" name="val2" value="1" checked="checked" />Да</label>
-        <label class="val hide"><input type="radio" id="val2-0" name="val2" value="0" />Нет</label>
-        <span class="view"></span>
-      </span>
-    </td>
-    <td>
-      <input type="button" name="edit_btnn" value="Изменить" class="edit_btn"/>
-      <input type="button" name="e2" value="Сохранить" class="ed save hide"/>
-      <input type="reset" name="e1" value="Отмена"  class="ed reset hide"/>
-    </td>
+    </span>
+    <div class="name">Radio:</div>
+    <span class="editable col2" title="Radio field">
+      <label class="edit hide"><input type="radio" id="f4-1" name="f4_ra" value="1" checked="checked" />Choice 1</label>
+      <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
+      <span class="view"></span>
+    </span>
+    <div class="name">&nbsp;</div>
+    <span class="col2">
+      <input type="button" value="Edit"  class="edit_on"/>
+      <input type="button" value="Save" class="edit_off save hide"/>
+      <input type="reset"  value="Reset"    class="edit_off reset hide"/>
+    </span>
   </form>
-</tr>
+</div>
+
+<h2>2. Table form</h2>
+
+<table>
+  <tr>
+    <td>
+        <table class="row">
+          <tr>
+            <th>Text field</th>
+            <th>Select</th>
+            <th>Checkbox</th>
+            <th>Radio</th>
+            <th>&nbsp;</th>
+          </tr>
+        </table>
+    </td>
+  </tr>
+  <tr class="row">
+    <td class="datarow">
+      <form id="form1_submit_id">
+        <table class="row">
+          <tr>
+            <td class="editable col2" title="Text field">
+              <input name="f1_text" type="text"  placeholder="Text field" value="some text" class="edit hide" />
+              <span class="view"></span>
+            </td>
+            <td class="editable col2" title="Select field">
+              <select name="f2_sel" class="edit hide" >
+                <option value="1" >value 1</option>
+                <option value="2" selected>value 2</option>
+                <option value="3" >value 3</option>
+              </select>
+              <span class="view"></span>
+            </td>
+            <td class="editable col2" title="Checkbox field">
+              <input type="checkbox" name="f3_chk" checked class="edit hide"/>
+              <span class="view">
+                <span class="on hide">YES</span>
+                <span class="off hide">NO</span>
+              </span>
+            </td>
+            <td class="editable col2" title="Radio field">
+              <label class="edit hide"><input type="radio" id="f4-1" name="f4_ra" value="1" checked="checked" />Choice 1</label>
+              <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
+              <span class="view"></span>
+            </td>
+            <td>
+              <input type="button" value="Edit"  class="edit_on"/>
+              <input type="button" value="Save" class="edit_off save hide"/>
+              <input type="reset"  value="Reset"    class="edit_off reset hide"/>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </td>
+  </tr>
+  <tr class="row">
+    <td class="datarow">
+      <form id="form2_submit_id">
+        <table class="row">
+          <tr>
+            <td class="editable col2" title="Text field">
+              <input name="f1_text" type="text"  placeholder="Text field" value="some text" class="edit hide" />
+              <span class="view"></span>
+            </td>
+            <td class="editable col2" title="Select field">
+              <select name="f2_sel" class="edit hide" >
+                <option value="1" >value 1</option>
+                <option value="2" selected>value 2</option>
+                <option value="3" >value 3</option>
+              </select>
+              <span class="view"></span>
+            </td>
+            <td class="editable col2" title="Checkbox field">
+              <input type="checkbox" name="f3_chk" checked class="edit hide"/>
+              <span class="view">
+                <span class="on hide">YES</span>
+                <span class="off hide">NO</span>
+              </span>
+            </td>
+            <td class="editable col2" title="Radio field">
+              <label class="edit hide"><input type="radio" id="f4-1" name="f4_ra" value="1" checked="checked" />Choice 1</label>
+              <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
+              <span class="view"></span>
+            </td>
+            <td>
+              <input type="button" value="Edit"  class="edit_on"/>
+              <input type="button" value="Save" class="edit_off save hide"/>
+              <input type="reset"  value="Reset"    class="edit_off reset hide"/>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </td>
+  </tr>
 </table>
+
+<hr>
+Project repository: <a href="https://github.com/LeKovr/formEV">github.com/LeKovr/formEV</a>
 
 <script type="text/javascript">
 //<![CDATA[
+
+// ----------------------------------------------------------------------------
+// saving data callback
+var cbSaveForm = function(container, cbSaveSuccess, cbFormDisable, cbFormEnable) {
+  var form = container.children('form');
+  var params = $(form).serializeArray();
+  var post = $.toJSON(params);
+  cbFormDisable(container);
+  // TODO: send data here
+  setTimeout(function() {
+    alert(form.attr('id') + "\n" + post);
+    cbFormEnable(container);
+    cbSaveSuccess(container);
+  }, 1000);
+  };
+
+// ----------------------------------------------------------------------------
 $(document).ready(function(){
-  $('.datarow').formEV({
-    names: {
-      childs: ['.val', '.view']
-    , buttons: ['.edit_btn', '.ed']
-    , chkeckboxes: [ '-', '+' ]
-    }
-  });
-  $("tr:odd").addClass('odd');
+  $('.datarow').formEV({ onSubmit : cbSaveForm });
+  $("tr.row:odd").addClass('odd');
 });
+
 
 //]]>
 </script>
