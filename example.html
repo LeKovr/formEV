@@ -7,9 +7,6 @@
 .hide {
   display: none;
 }
-.odd {
-  background-color:#EDEDED;
-}
 .name {
   float: left;
   width: 100px;
@@ -20,8 +17,16 @@
   content:"";
   clear:both;
 }
-table.row td,th {
-  width: 200px;
+
+.table { display: table; }
+.table>* { display: table-row; }
+.table>*>* { display: table-cell; margin:5; width: 200px;}
+
+.table>*:nth-child(odd)>* {
+    background: #EDEDED;
+}
+.table>*:nth-child(1)>* {
+    font-weight: bold;
 }
 </style>
 </head>
@@ -68,100 +73,77 @@ table.row td,th {
 </div>
 
 <h2>2. Table form</h2>
-
-<table>
-  <tr>
-    <td>
-        <table class="row">
-          <tr>
-            <th>Text field</th>
-            <th>Select</th>
-            <th>Checkbox</th>
-            <th>Radio</th>
-            <th>&nbsp;</th>
-          </tr>
-        </table>
-    </td>
-  </tr>
-  <tr class="row">
-    <td class="datarow">
-      <form id="form1_submit_id">
-        <table class="row">
-          <tr>
-            <td class="editable col2" title="Text field">
-              <input name="f1_text" type="text"  placeholder="Text field" value="some text" class="edit hide" />
-              <span class="view"></span>
-            </td>
-            <td class="editable col2" title="Select field">
-              <select name="f2_sel" class="edit hide" >
-                <option value="1" >value 1</option>
-                <option value="2" selected>value 2</option>
-                <option value="3" >value 3</option>
-              </select>
-              <span class="view"></span>
-            </td>
-            <td class="editable col2" title="Checkbox field">
-              <input type="checkbox" name="f3_chk" checked class="edit hide"/>
-              <span class="view">
-                <span class="on hide">YES</span>
-                <span class="off hide">NO</span>
-              </span>
-            </td>
-            <td class="editable col2" title="Radio field">
-              <label class="edit hide"><input type="radio" id="f4-1" name="f4_ra" value="1" checked="checked" />Choice 1</label>
-              <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
-              <span class="view"></span>
-            </td>
-            <td>
-              <input type="button" value="Edit"  class="edit_on"/>
-              <input type="button" value="Save" class="edit_off save hide"/>
-              <input type="reset"  value="Reset"    class="edit_off reset hide"/>
-            </td>
-          </tr>
-        </table>
-      </form>
-    </td>
-  </tr>
-  <tr class="row">
-    <td class="datarow">
-      <form id="form2_submit_id">
-        <table class="row">
-          <tr>
-            <td class="editable col2" title="Text field">
-              <input name="f1_text" type="text"  placeholder="Text field" value="some text" class="edit hide" />
-              <span class="view"></span>
-            </td>
-            <td class="editable col2" title="Select field">
-              <select name="f2_sel" class="edit hide" >
-                <option value="1" >value 1</option>
-                <option value="2" selected>value 2</option>
-                <option value="3" >value 3</option>
-              </select>
-              <span class="view"></span>
-            </td>
-            <td class="editable col2" title="Checkbox field">
-              <input type="checkbox" name="f3_chk" checked class="edit hide"/>
-              <span class="view">
-                <span class="on hide">YES</span>
-                <span class="off hide">NO</span>
-              </span>
-            </td>
-            <td class="editable col2" title="Radio field">
-              <label class="edit hide"><input type="radio" id="f4-1" name="f4_ra" value="1" checked="checked" />Choice 1</label>
-              <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
-              <span class="view"></span>
-            </td>
-            <td>
-              <input type="button" value="Edit"  class="edit_on"/>
-              <input type="button" value="Save" class="edit_off save hide"/>
-              <input type="reset"  value="Reset"    class="edit_off reset hide"/>
-            </td>
-          </tr>
-        </table>
-      </form>
-    </td>
-  </tr>
-</table>
+<div class='table'>
+  <div>
+    <div>Text field</div>
+    <div>Select</div>
+    <div>Checkbox</div>
+    <div>Radio</div>
+    <div>&nbsp;</div>
+  </div>
+  <form id="form1_submit_id" class="formRow">
+    <div class="editable col2" title="Text field">
+      <input name="f1_text" type="text"  placeholder="Text field" value="some text" class="edit hide" />
+      <span class="view"></span>
+    </div>
+    <div class="editable col2" title="Select field">
+      <select name="f2_sel" class="edit hide" >
+        <option value="1" >value 1</option>
+        <option value="2" selected>value 2</option>
+        <option value="3" >value 3</option>
+      </select>
+      <span class="view"></span>
+    </div>
+    <div class="editable col2" title="Checkbox field">
+      <input type="checkbox" name="f3_chk" checked class="edit hide"/>
+      <span class="view">
+        <span class="on hide">YES</span>
+        <span class="off hide">NO</span>
+      </span>
+    </div>
+    <div class="editable col2" title="Radio field">
+      <label class="edit hide"><input type="radio" id="f4-1" name="f4_ra" value="1" checked="checked" />Choice 1</label>
+      <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
+      <span class="view">asdasd</span>
+    </div>
+    <div>
+      <input type="button" value="Edit"  class="edit_on"/>
+      <input type="button" value="Save" class="edit_off save hide"/>
+      <input type="reset"  value="Reset"    class="edit_off reset hide"/>
+    </div>
+  </form>
+  <form id="form2_submit_id" class="formRow">
+    <div class="editable col2" title="Text field">
+      <input name="f1_text" type="text"  placeholder="Text field" value="some text" class="edit hide" />
+      <span class="view"></span>
+    </div>
+    <div class="editable col2" title="Select field">
+      <select name="f2_sel" class="edit hide" >
+        <option value="1" >value 1</option>
+        <option value="2" selected>value 2</option>
+        <option value="3" >value 3</option>
+      </select>
+      <span class="view"></span>
+    </div>
+    <div class="editable col2" title="Checkbox field">
+      <input type="checkbox" name="f3_chk" checked class="edit hide"/>
+      <span class="view">
+        <span class="on hide">YES</span>
+        <span class="off hide">NO</span>
+      </span>
+    </div>
+    <div class="editable col2" title="Radio field">
+      <label class="edit hide"><input type="radio" id="f4-1" name="f4_ra" value="1" checked="checked" />Choice 1</label>
+      <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
+      <span class="view">asdasd</span>
+    </div>
+    <div>
+      <input type="button" value="Edit"  class="edit_on"/>
+      <input type="button" value="Save" class="edit_off save hide"/>
+      <input type="reset"  value="Reset"    class="edit_off reset hide"/>
+    </div>
+  </form>
+</div>
 
 <hr>
 Project repository: <a href="https://github.com/LeKovr/formEV">github.com/LeKovr/formEV</a>
@@ -172,7 +154,7 @@ Project repository: <a href="https://github.com/LeKovr/formEV">github.com/LeKovr
 // ----------------------------------------------------------------------------
 // saving data callback
 var cbSaveForm = function(container, cbSaveSuccess, cbFormDisable, cbFormEnable) {
-  var form = container.children('form');
+  var form = container.is('form')?container:container.find('form');
   var params = $(form).serializeArray();
   var post = $.toJSON(params);
   cbFormDisable(container);
@@ -187,9 +169,9 @@ var cbSaveForm = function(container, cbSaveSuccess, cbFormDisable, cbFormEnable)
 // ----------------------------------------------------------------------------
 $(document).ready(function(){
   $('.datarow').formEV({ onSubmit : cbSaveForm });
+  $('.formRow').formEV({ onSubmit : cbSaveForm });
   $("tr.row:odd").addClass('odd');
 });
-
 
 //]]>
 </script>
