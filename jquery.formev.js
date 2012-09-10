@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------
 /*
  * jQuery FormEV Plugin
- * version: 0.2 (2012-09-04)
+ * version: 0.3 (2012-09-04)
  *
  * This document is licensed as free software under the terms of the
  * MIT License: http://www.opensource.org/licenses/mit-license.php
