@@ -13,6 +13,8 @@
 
 $.fn.formEV = function(options) {
 
+  "use strict";
+
   // ----------------------------------------------------------------------------
   // Saving callback example
   var onSubmitExample = function(container, cbSaveSuccess, cbFormDisable, cbFormEnable) {
@@ -21,7 +23,7 @@ $.fn.formEV = function(options) {
     var post = JSON.stringify(params, null, 2);
     cbFormDisable(container);
     setTimeout(function() {
-      alert("Ready to send:\n" + post);
+      window.alert("Ready to send:\n" + post);
       cbFormEnable(container);
       cbSaveSuccess(container);
     }, 2000);
@@ -47,8 +49,8 @@ $.fn.formEV = function(options) {
   // ----------------------------------------------------------------------------
   // Set Edit/View mode
   var show = function (container, isEdit) {
-    h = (isEdit ? options.itemView : options.itemEdit);
-    s = (isEdit ? options.itemEdit : options.itemView);
+    var h = (isEdit ? options.itemView : options.itemEdit);
+    var s = (isEdit ? options.itemEdit : options.itemView);
     container.find(h).hide();
     container.find(s).show();
   };
@@ -60,13 +62,14 @@ $.fn.formEV = function(options) {
       var field = $(this).children(options.itemEdit);
       var needWrite = true;
       var target = $(this).children(options.itemView);
+      var val;
       if (field.is('select')) {
         val = field.children('option:selected').text();
       } else if ( field.is('label') ) {  // radio
         val = field.find('input[type="radio"]:checked').parent().text();
       } else if ( field.is('input[type="checkbox"]') ) {
-        h = field.is(':checked') ? options.chkOff : options.chkOn;
-        s = field.is(':checked') ? options.chkOn : options.chkOff;
+        var h = field.is(':checked') ? options.chkOff : options.chkOn;
+        var s = field.is(':checked') ? options.chkOn : options.chkOff;
         target.children(h).hide();
         target.children(s).show();
         needWrite = false;
@@ -78,7 +81,7 @@ $.fn.formEV = function(options) {
         target.text(val);
       }
     });
-    if (options.onViewReady) { options.onViewReady(container) }
+    if (options.onViewReady) { options.onViewReady(container); }
   };
 
   // ----------------------------------------------------------------------------
@@ -112,7 +115,7 @@ $.fn.formEV = function(options) {
   // Initialize containers at start
   this.each(function(){
     var container = $(this);
-    btns = container.find(options.btnContainer);
+    var btns = container.find(options.btnContainer);
     btns.find(options.btnEdit).click(function()   { show(container, true); });
     btns.find(options.btnReset).click(function()  { show(container, false); return true; });
     btns.find(options.btnSubmit).click(function() { submitForm(container); return false; });
