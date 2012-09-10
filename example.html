@@ -3,6 +3,7 @@
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"                     type="text/javascript"></script>
 <script src="http://jquery-json.googlecode.com/files/jquery.json-2.3.min.js" type="text/javascript"></script>
 <script src="https://raw.github.com/LeKovr/formEV/master/jquery.formev.js" type="text/javascript"></script>
+<script src="jquery.formev.js"></script>
 <style type="text/css">
 .hide {
   display: none;
@@ -20,7 +21,7 @@
 
 .table { display: table; }
 .table>* { display: table-row; }
-.table>*>* { display: table-cell; margin:5; width: 200px;}
+.table>*>* { display: table-cell; margin:5px; width: 200px;}
 
 .table>*:nth-child(odd)>* {
     background: #EDEDED;
@@ -64,10 +65,10 @@
       <span class="view"></span>
     </span>
     <div class="name">&nbsp;</div>
-    <span class="col2">
-      <input type="button" value="Edit"  class="edit_on"/>
-      <input type="button" value="Save" class="edit_off save hide"/>
-      <input type="reset"  value="Reset"    class="edit_off reset hide"/>
+    <span class="buttons col2">
+      <input type="button" value="Edit"   class="view edit_on"/>
+      <input type="button" value="Save"   class="edit save hide"/>
+      <input type="reset"  value="Reset"  class="edit reset hide"/>
     </span>
   </form>
 </div>
@@ -106,10 +107,10 @@
       <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
       <span class="view">asdasd</span>
     </div>
-    <div>
-      <input type="button" value="Edit"  class="edit_on"/>
-      <input type="button" value="Save" class="edit_off save hide"/>
-      <input type="reset"  value="Reset"    class="edit_off reset hide"/>
+    <div class="buttons">
+      <input type="button" value="Edit"   class="view edit_on"/>
+      <input type="button" value="Save"   class="edit save hide"/>
+      <input type="reset"  value="Reset"  class="edit reset hide"/>
     </div>
   </form>
   <form id="form2_submit_id" class="formRow">
@@ -137,10 +138,10 @@
       <label class="edit hide"><input type="radio" id="f4-0" name="f4_ra" value="2" />Choice 2</label>
       <span class="view">asdasd</span>
     </div>
-    <div>
-      <input type="button" value="Edit"  class="edit_on"/>
-      <input type="button" value="Save" class="edit_off save hide"/>
-      <input type="reset"  value="Reset"    class="edit_off reset hide"/>
+    <div class="buttons">
+      <input type="button" value="Edit"   class="view edit_on"/>
+      <input type="button" value="Save"   class="edit save hide"/>
+      <input type="reset"  value="Reset"  class="edit reset hide"/>
     </div>
   </form>
 </div>
@@ -156,7 +157,7 @@ Project repository: <a href="https://github.com/LeKovr/formEV">github.com/LeKovr
 var cbSaveForm = function(container, cbSaveSuccess, cbFormDisable, cbFormEnable) {
   var form = container.is('form')?container:container.find('form');
   var params = $(form).serializeArray();
-  var post = $.toJSON(params);
+  var post = JSON.stringify(params, null, 2);
   cbFormDisable(container);
   // TODO: send data here
   setTimeout(function() {
@@ -170,7 +171,6 @@ var cbSaveForm = function(container, cbSaveSuccess, cbFormDisable, cbFormEnable)
 $(document).ready(function(){
   $('.datarow').formEV({ onSubmit : cbSaveForm });
   $('.formRow').formEV({ onSubmit : cbSaveForm });
-  $("tr.row:odd").addClass('odd');
 });
 
 //]]>

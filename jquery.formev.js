@@ -16,9 +16,9 @@ $.fn.formEV = function(options) {
   // ----------------------------------------------------------------------------
   // Saving callback example
   var onSubmitExample = function(container, cbSaveSuccess, cbFormDisable, cbFormEnable) {
-    var form = container.children('form');
+    var form = container.is('form')?container : container.find('form');
     var params = $(form).serializeArray();
-    var post = $.toJSON(params);
+    var post = JSON.stringify(params, null, 2);
     cbFormDisable(container);
     setTimeout(function() {
       alert("Ready to send:\n" + post);
@@ -30,48 +30,45 @@ $.fn.formEV = function(options) {
   // ----------------------------------------------------------------------------
   // All options listed here
   options = $.extend(true, {
-    fldContainerClass:'editable'
-  , fldViewClass:     'view'
-  , fldEditClass:     'edit'
-  , btnEditOnClass:   'edit_on'
-  , btnEditOffClass:  'edit_off'
-  , btnSaveClass:     'save'
-  , btnResetClass:    'reset'
-  , chkOnClass:       'on'
-  , chkOffClass:      'off'
-  , onSubmit:         onSubmitExample   // Called when user clicks Submit
-  , onViewReady:      null              // Called when fields are ready to be shown in View mode
+    fldContainer:     '.editable',          // selector for every form field container
+    btnContainer:     '.buttons',           // button container selector
+    itemView:         '.view',              // view mode container
+    itemEdit:         '.edit',              // edit mode container
+    btnEdit:          '.edit_on',           // button to show edit mode
+    btnSubmit:        '.save',              // submit control
+    btnReset:         '.reset',             // reset control
+    chkOn:            '.on',                // checkbox 'On' value container
+    chkOff:           '.off',               // checkbox 'Off' value container
+    tmpDisabledClass: 'disabled_till_send', // class for input disabling while submit processing
+    onSubmit:         onSubmitExample,      // function called when user clicks Submit
+    onViewReady:      null                  // function called when fields are ready to be shown in View mode
   }, options);
 
   // ----------------------------------------------------------------------------
   // Set Edit/View mode
-  var setMode = function (isEdit, container) {
-    with (options) {
-      container.find('.' + fldContainerClass).each(function() {
-        $(this).children('.' + (isEdit ? fldViewClass : fldEditClass)).addClass('hide');
-        $(this).children('.' + (isEdit ? fldEditClass : fldViewClass)).removeClass('hide');
-      });
-      container.find('.' + (isEdit ? btnEditOnClass : btnEditOffClass)).addClass('hide');
-      container.find('.' + (isEdit ? btnEditOffClass : btnEditOnClass)).removeClass('hide');
-    };
+  var show = function (container, isEdit) {
+    h = (isEdit ? options.itemView : options.itemEdit);
+    s = (isEdit ? options.itemEdit : options.itemView);
+    container.find(h).hide();
+    container.find(s).show();
   };
 
   // ----------------------------------------------------------------------------
   // Fill Read mode data from inputs
-  var viewModeRefresh = function(container) {
-    container.find('.'+options.fldContainerClass).each(function() {
-      var field = $(this).children('.' + options.fldEditClass);
+  var refresh = function(container) {
+    container.find(options.fldContainer).each(function() {
+      var field = $(this).children(options.itemEdit);
       var needWrite = true;
-      var target = $(this).children('.' + options.fldViewClass);
+      var target = $(this).children(options.itemView);
       if (field.is('select')) {
         val = field.children('option:selected').text();
       } else if ( field.is('label') ) {  // radio
         val = field.find('input[type="radio"]:checked').parent().text();
       } else if ( field.is('input[type="checkbox"]') ) {
-        with (options) {
-          target.children('.' + (field.is(':checked') ? chkOffClass : chkOnClass)).addClass('hide');
-          target.children('.' + (field.is(':checked') ? chkOnClass : chkOffClass)).removeClass('hide');
-        }
+        h = field.is(':checked') ? options.chkOff : options.chkOn;
+        s = field.is(':checked') ? options.chkOn : options.chkOff;
+        target.children(h).hide();
+        target.children(s).show();
         needWrite = false;
       } else  {
         // text field
@@ -82,28 +79,27 @@ $.fn.formEV = function(options) {
       }
     });
     if (options.onViewReady) { options.onViewReady(container) }
-
   };
 
   // ----------------------------------------------------------------------------
   // Switch to view mode after successfull submit
   var cbSubmitSuccess = function(container) {
-    viewModeRefresh(container);
-    setMode(false, container);
+    refresh(container);
+    show(container, false);
   };
 
   // ----------------------------------------------------------------------------
   // Disable fields for edit while saving
   var cbFormDisable = function(container) {
-    container.find('.' + options.fldEditClass).not(':disabled').addClass('disabled_till_send').attr('disabled', 'disabled');
-    // disable radio inside label
-    container.find('.' + options.fldEditClass + ' :input').not(':disabled').addClass('disabled_till_send').attr('disabled', 'disabled');
+    container.find(options.itemEdit).not(':disabled').addClass(options.tmpDisabledClass).attr('disabled', 'disabled');
+    // also disable radio inside label
+    container.find(options.itemEdit + ' :input').not(':disabled').addClass(options.tmpDisabledClass).attr('disabled', 'disabled');
   };
 
   // ----------------------------------------------------------------------------
   // Enable back fields for edit after successfull saving
   var cbFormEnable = function(container) {
-    container.find('.disabled_till_send').removeAttr('disabled').removeClass('disabled_till_send');
+    container.find('.' + options.tmpDisabledClass).removeAttr('disabled').removeClass(options.tmpDisabledClass);
   };
 
   // ----------------------------------------------------------------------------
@@ -115,17 +111,11 @@ $.fn.formEV = function(options) {
   // ----------------------------------------------------------------------------
   // Initialize containers at start
   this.each(function(){
-    var row = $(this);
-    row.find('.' + options.btnEditOnClass).each(function(){
-      $(this).click(function(){ setMode(true, row); });
-    });
-    row.find('.' + options.btnResetClass).each(function(){
-      $(this).click(function(){ setMode(false, row); return true; });
-    });
-      row.find('.' + options.btnSaveClass).each(function(){
-      $(this).click(function(){ submitForm(row); });
-    });
-    viewModeRefresh(row);
+    var container = $(this);
+    btns = container.find(options.btnContainer);
+    btns.find(options.btnEdit).click(function()   { show(container, true); });
+    btns.find(options.btnReset).click(function()  { show(container, false); return true; });
+    btns.find(options.btnSubmit).click(function() { submitForm(container); return false; });
+    refresh(container);
   });
-
 };
